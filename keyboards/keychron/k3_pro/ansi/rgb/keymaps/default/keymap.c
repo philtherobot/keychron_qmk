@@ -22,8 +22,26 @@ enum layers{
   MAC_FN,
   WIN_BASE,
   WIN_FN,
-  EXTEND
+  EXTEND,
+  SYMBOLS1
 };
+
+#define KC_Agrav     UC(0x00E0) // à
+#define KC_Acirc     UC(0x00E2) // â
+#define KC_Adiae     UC(0x00E4) // ä
+#define KC_Egrav     UC(0x00E8) // è
+#define KC_Eacut     UC(0x00E9) // é
+#define KC_Ecirc     UC(0x00EA) // ê
+#define KC_Ediae     UC(0x00EB) // ë
+#define KC_Icirc     UC(0x00EE) // î
+#define KC_Idiae     UC(0x00EF) // ï
+#define KC_Ocirc     UC(0x00F4) // ô
+#define KC_Ugrav     UC(0x00F9) // ù
+#define KC_Ucirc     UC(0x00FB) // û
+#define KC_Udiae     UC(0x00FC) // ü
+#define KC_Ccedi     UC(0x00E7) // ç
+#define KC_LAngQuot  UC(0x00AB) // «
+#define KC_RAngQuot  UC(0x00BB) // »
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -48,12 +66,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 [WIN_BASE] = LAYOUT_ansi_84(
-     KC_ESC,      KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,     KC_F12,   KC_PSCR,  KC_DEL,   RGB_MOD,
-     KC_GRV,      KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_EQL,   KC_7,     KC_8,     KC_9,     KC_0,       KC_MINS,  KC_BSPC,            KC_PGUP,
-     KC_TAB,      KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,     KC_LBRC,  KC_J,     KC_L,     KC_U,     KC_Y,     KC_SCLN,    KC_QUOT,  KC_BSLS,            KC_PGDN,
-     TT(EXTEND),  KC_A,     KC_R,     KC_S,     KC_T,     KC_G,     KC_RBRC,  KC_M,     KC_N,     KC_E,     KC_I,     KC_O,                 KC_ENT,             KC_HOME,
-     KC_LSFT,               KC_X,     KC_C,     KC_D,     KC_V,     KC_Z,     KC_SLSH,  KC_K,     KC_H,     KC_COMM,  KC_DOT,               KC_RSFT,  KC_UP,    KC_END,
-     KC_LCTL,     KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT,  MO(WIN_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
+     KC_ESC,      KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,        KC_F11,     KC_F12,   KC_PSCR,  KC_DEL,   RGB_MOD,
+     KC_GRV,      KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_EQL,   KC_7,     KC_8,     KC_9,          KC_0,       KC_MINS,  KC_BSPC,            KC_PGUP,
+     KC_TAB,      KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,     KC_LBRC,  KC_J,     KC_L,     KC_U,     KC_Y,          KC_SCLN,    KC_QUOT,  KC_BSLS,            KC_PGDN,
+     TT(EXTEND),  KC_A,     KC_R,     KC_S,     KC_T,     KC_G,     KC_RBRC,  KC_M,     KC_N,     KC_E,     KC_I,          KC_O,                 KC_ENT,             KC_HOME,
+     KC_LSFT,               KC_X,     KC_C,     KC_D,     KC_V,     KC_Z,     KC_SLSH,  KC_K,     KC_H,     KC_COMM,       KC_DOT,               KC_RSFT,  KC_UP,    KC_END,
+     KC_LCTL,     KC_LGUI,  KC_LALT,                                KC_SPC,                                 OSL(SYMBOLS1), MO(WIN_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
 [WIN_FN] = LAYOUT_ansi_84(
      KC_TRNS,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_TRNS,  KC_TRNS,  RGB_TOG,
@@ -69,5 +87,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TRNS,  KC_ESC,   RGB_VAI,    RGB_HUI,    RGB_SAI,    KC_MS_UP,   RGB_SPI,    KC_PGUP,    KC_HOME,    KC_UP,      KC_END,     KC_DEL,      KC_ESC,   KC_TRNS,            KC_TRNS,
      KC_TRNS,  KC_LALT,  KC_TRNS,    KC_LSFT,    KC_LCTL,    KC_MS_DOWN, KC_TRNS,    KC_PGDN,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_BSPC,               KC_TRNS,            KC_TRNS,
      KC_TRNS,            LCTL(KC_X), LCTL(KC_C), LCTL(KC_D), LCTL(KC_V), LCTL(KC_Z), KC_MS_BTN1, KC_MS_BTN3, KC_MS_BTN2, KC_MS_LEFT, KC_MS_RIGHT,           KC_TRNS,  KC_TRNS,  KC_TRNS,
-     KC_TRNS,  KC_TRNS,  KC_TRNS,                                        KC_TRNS,                                        KC_TRNS,    KC_TRNS,     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS)
+     KC_TRNS,  KC_TRNS,  KC_TRNS,                                        KC_TRNS,                                        KC_TRNS,    KC_TRNS,     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
+
+[SYMBOLS1] = LAYOUT_ansi_84(
+//esc        F1         F2         F3         F4         F5         F6         F7         F8         F9         F10        F11        F12        snap       del        bright
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS              ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_Icirc  ,KC_Ocirc  ,KC_Acirc  ,KC_Idiae  ,KC_TRNS   ,KC_TRNS   ,KC_TRNS              ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_Eacut  ,KC_Egrav  ,KC_Ecirc  ,KC_Ediae  ,KC_TRNS                         ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,KC_Ccedi  ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_Ugrav  ,KC_Ucirc  ,KC_Udiae  ,KC_TRNS                         ,KC_TRNS   ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS                                    ,KC_TRNS                                    ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS)
+
+/* A blank layer
+[<name>] = LAYOUT_ansi_84(
+//esc        F1         F2         F3         F4         F5         F6         F7         F8         F9         F10        F11        F12        snap       del        bright
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS              ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS              ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS                         ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS                         ,KC_TRNS   ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS                                    ,KC_TRNS                                    ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS)
+*/
+
 };
