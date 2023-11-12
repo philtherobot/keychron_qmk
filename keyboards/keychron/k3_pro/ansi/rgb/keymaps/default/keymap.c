@@ -26,22 +26,78 @@ enum layers{
   SYMBOLS1
 };
 
-#define KC_Agrav     UC(0x00E0) // à
-#define KC_Acirc     UC(0x00E2) // â
-#define KC_Adiae     UC(0x00E4) // ä
-#define KC_Egrav     UC(0x00E8) // è
-#define KC_Eacut     UC(0x00E9) // é
-#define KC_Ecirc     UC(0x00EA) // ê
-#define KC_Ediae     UC(0x00EB) // ë
-#define KC_Icirc     UC(0x00EE) // î
-#define KC_Idiae     UC(0x00EF) // ï
-#define KC_Ocirc     UC(0x00F4) // ô
-#define KC_Ugrav     UC(0x00F9) // ù
-#define KC_Ucirc     UC(0x00FB) // û
-#define KC_Udiae     UC(0x00FC) // ü
-#define KC_Ccedi     UC(0x00E7) // ç
-#define KC_LAngQuot  UC(0x00AB) // «
-#define KC_RAngQuot  UC(0x00BB) // »
+
+enum unicode_names {
+    agrav,    Agrav,
+    acirc,    Acirc,
+    adiae,    Adiae,
+
+    egrav,    Egrav,
+    eacut,    Eacut,
+    ecirc,    Ecirc,
+    ediae,    Ediae,
+
+    icirc,    Icirc,
+    idiae,    Idiae,
+
+    ocirc,    Ocirc,
+
+    ugrav,    Ugrav,
+    ucirc,    Ucirc,
+    udiae,    Udiae,
+
+    ccedi,    Ccedi,
+
+    LAngQuot,
+    RAngQuot
+};
+
+const uint32_t unicode_map[] PROGMEM = {
+    [agrav]     = 0x00E0, // à
+    [Agrav]     = 0x00C0, // À
+
+    [acirc]     = 0x00E2, // â
+    [Acirc]     = 0x00C2, // Â
+
+    [adiae]     = 0x00E4, // ä
+    [Adiae]     = 0x00C4, // Ä
+
+    [egrav]     = 0x00E8, // è
+    [Egrav]     = 0x00C8, // È
+
+    [eacut]     = 0x00E9, // é
+    [Eacut]     = 0x00C9, // É
+
+    [ecirc]     = 0x00EA, // ê
+    [Ecirc]     = 0x00CA, // Ê
+
+    [ediae]     = 0x00EB, // ë
+    [Ediae]     = 0x00CB, // Ë
+
+    [icirc]     = 0x00EE, // î
+    [Icirc]     = 0x00CE, // Î
+
+    [idiae]     = 0x00EF, // ï
+    [Idiae]     = 0x00CF, // Ï
+
+    [ocirc]     = 0x00F4, // ô
+    [Ocirc]     = 0x00D4, // Ô
+
+    [ugrav]     = 0x00F9, // ù
+    [Ugrav]     = 0x00D9, // Ù
+
+    [ucirc]     = 0x00FB, // û
+    [Ucirc]     = 0x00DB, // Û
+
+    [udiae]     = 0x00FC, // ü
+    [Udiae]     = 0x00DC, // Ü
+
+    [ccedi]     = 0x00E7, // ç
+    [Ccedi]     = 0x00C7, // Ç
+
+    [LAngQuot]  = 0x00AB, // «
+    [RAngQuot]  = 0x00BB, // »
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -68,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [WIN_BASE] = LAYOUT_ansi_84(
      KC_ESC,      KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,        KC_F11,     KC_F12,   KC_PSCR,  KC_DEL,   RGB_MOD,
      KC_GRV,      KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_EQL,   KC_7,     KC_8,     KC_9,          KC_0,       KC_MINS,  KC_BSPC,            KC_PGUP,
-     KC_TAB,      KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,     KC_LBRC,  KC_J,     KC_L,     KC_U,     KC_Y,          KC_SCLN,    KC_QUOT,  KC_BSLS,            KC_PGDN,
+     KC_TAB,      KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,     KC_LBRC,  KC_J,     KC_L,     KC_U,     KC_Y,          KC_SCLN,    KC_ttQUOT,  KC_BSLS,            KC_PGDN,
      TT(EXTEND),  KC_A,     KC_R,     KC_S,     KC_T,     KC_G,     KC_RBRC,  KC_M,     KC_N,     KC_E,     KC_I,          KC_O,                 KC_ENT,             KC_HOME,
      KC_LSFT,               KC_X,     KC_C,     KC_D,     KC_V,     KC_Z,     KC_SLSH,  KC_K,     KC_H,     KC_COMM,       KC_DOT,               KC_RSFT,  KC_UP,    KC_END,
      KC_LCTL,     KC_LGUI,  KC_LALT,                                KC_SPC,                                 OSL(SYMBOLS1), MO(WIN_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
@@ -90,13 +146,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TRNS,  KC_TRNS,  KC_TRNS,                                        KC_TRNS,                                        KC_TRNS,    KC_TRNS,     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 
 [SYMBOLS1] = LAYOUT_ansi_84(
-//esc        F1         F2         F3         F4         F5         F6         F7         F8         F9         F10        F11        F12        snap       del        bright
-  KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS,
-  KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS              ,KC_TRNS,
-  KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_Icirc  ,KC_Ocirc  ,KC_Acirc  ,KC_Idiae  ,KC_TRNS   ,KC_TRNS   ,KC_TRNS              ,KC_TRNS,
-  KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_Eacut  ,KC_Egrav  ,KC_Ecirc  ,KC_Ediae  ,KC_TRNS                         ,KC_TRNS,
-  KC_TRNS   ,KC_TRNS   ,KC_Ccedi  ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_Ugrav  ,KC_Ucirc  ,KC_Udiae  ,KC_TRNS                         ,KC_TRNS   ,KC_TRNS,
-  KC_TRNS   ,KC_TRNS   ,KC_TRNS                                    ,KC_TRNS                                    ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS)
+//esc        F1         F2                 F3         F4         F5         F6         F7                 F8                 F9                 F10                F11                   F12        snap       del        bright
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,KC_TRNS           ,KC_TRNS           ,KC_TRNS           ,KC_TRNS              ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,KC_TRNS           ,KC_TRNS           ,KC_TRNS           ,KC_TRNS              ,KC_TRNS   ,KC_TRNS              ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,XP(agrav, Agrav)  ,XP(ocirc, Ocirc)  ,XP(acirc, Acirc)  ,XP(icirc, Icirc)     ,KC_TRNS   ,KC_TRNS              ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,XP(idiae, Idiae)  ,XP(eacut, Eacut)  ,XP(egrav, Egrav)  ,XP(ecirc, Ecirc)  ,XP(ediae, Ediae)     ,KC_TRNS                         ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,XP(ccedi, Ccedi)  ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,XP(ucirc, Ucirc)  ,XP(ugrav, Ugrav)  ,XP(udiae, Udiae)  ,KC_TRNS                                    ,KC_TRNS   ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS                                            ,KC_TRNS                                         ,KC_TRNS           ,KC_TRNS           ,KC_TRNS              ,KC_TRNS   ,KC_TRNS   ,KC_TRNS)
 
 /* A blank layer
 [<name>] = LAYOUT_ansi_84(
