@@ -5,6 +5,7 @@ This feature allows you to use RGB LED matrices driven by external drivers. It h
 If you want to use single color LED's you should use the [LED Matrix Subsystem](feature_led_matrix.md) instead.
 
 ## Driver configuration :id=driver-configuration
+
 ---
 ### IS31FL3731 :id=is31fl3731
 

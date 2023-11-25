@@ -23,6 +23,13 @@
 // - turn off
 // - hold Esc, turn on
 
+
+//void keyboard_post_init_user(void) {
+//    //rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+//    rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_my_cool_effect);
+//    rgb_matrix_sethsv_noeeprom(HSV_OFF);
+//}
+
 // clang-format off
 enum layers{
   MAC_BASE,
@@ -32,6 +39,76 @@ enum layers{
   EXTEND,
   SYMBOLS1
 };
+
+enum extend_colors {
+    ARR = 1,  // arrows
+    MOV,      // moving/jumping
+    RUB,      // rubbing
+    MOS,      // mouse
+    CLP,      // clipboard
+    MDE,      // modes
+    OTH       // other
+};
+
+
+// @formatter:off
+uint8_t extend_rgb_matrix[MATRIX_ROWS * MATRIX_COLS] = {
+   OTH,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,
+   OTH,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,              0,
+   0,      OTH,    0,      0,      0,      MOS,    0,      MOV,    MOV,    ARR,    MOV,    RUB,    0,      0,              0,
+   0,      MDE,    MDE,    MDE,    MDE,    MOS,    0,      MOV,    ARR,    ARR,    ARR,    RUB,            0,              0,
+   0,              RUB,    CLP,    CLP,    CLP,    CLP,    MOS,    MOS,    MOS,    MOS,    MOS,            0,      0,      0,
+   0,      0,      0,                              0,                              0,      0,      0,      0,      0,      0
+};
+// @formatter:on
+
+void set_extend_rgb_matrix(uint8_t led_min, uint8_t led_max) {
+    for (uint8_t i = led_min; i < led_max; i++) {
+        uint8_t color_index = extend_rgb_matrix[i];
+
+        switch(color_index) {
+            case CLP:
+                rgb_matrix_set_color(i, RGB_GOLD);
+                break;
+            case MDE:
+                rgb_matrix_set_color(i, RGB_GREEN);
+                break;
+            case MOS:
+                rgb_matrix_set_color(i, RGB_AZURE);
+                break;
+            case RUB:
+                rgb_matrix_set_color(i, RGB_RED);
+                break;
+            case OTH:
+            case MOV:
+                rgb_matrix_set_color(i, RGB_BLUE);
+                break;
+            case ARR:
+                rgb_matrix_set_color(i, RGB_YELLOW);
+                break;
+            default:
+            case 0:
+                rgb_matrix_set_color(i, RGB_BLACK);
+                break;
+        }
+    }
+}
+
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    switch(get_highest_layer(layer_state|default_layer_state)) {
+        case WIN_BASE:
+        case WIN_FN:
+        case SYMBOLS1:
+            rgb_matrix_set_color_all(RGB_PINK);
+            break;
+        case EXTEND:
+            set_extend_rgb_matrix(led_min, led_max);
+            break;
+        default:
+            break;
+    }
+    return false;
+}
 
 
 enum unicode_names {
