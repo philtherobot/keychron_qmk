@@ -58,7 +58,7 @@
 
 // Delay between starting Unicode input and sending a sequence, in ms
 #ifndef UNICODE_TYPE_DELAY
-#    define UNICODE_TYPE_DELAY 10
+#    define UNICODE_TYPE_DELAY 20
 #endif
 
 unicode_config_t unicode_config;
