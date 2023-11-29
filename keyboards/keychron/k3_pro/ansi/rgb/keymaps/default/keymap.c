@@ -199,7 +199,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 [WIN_BASE] = LAYOUT_ansi_84(
-     KC_ESC,      KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,        KC_F11,     KC_F12,   KC_PSCR,  KC_DEL,   RGB_MOD,
+     KC_ESC,      KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,        KC_F11,     KC_F12,   KC_PSCR,  KC_DEL,   KC_PAUSE,
      KC_GRV,      KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_EQL,   KC_7,     KC_8,     KC_9,          KC_0,       KC_MINS,  KC_BSPC,            KC_PGUP,
      KC_TAB,      KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,     KC_LBRC,  KC_J,     KC_L,     KC_U,     KC_Y,          KC_SCLN,    KC_QUOT,  KC_BSLS,            KC_PGDN,
      TT(EXTEND),  KC_A,     KC_R,     KC_S,     KC_T,     KC_G,     KC_RBRC,  KC_M,     KC_N,     KC_E,     KC_I,          KC_O,                 KC_ENT,             KC_HOME,
@@ -217,7 +217,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [EXTEND] = LAYOUT_ansi_84(
      KC_CAPS,  KC_BRID,  KC_BRIU,    KC_TASK,    KC_FILE,    RGB_VAD,    RGB_VAI,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MUTE,    KC_VOLD,     KC_VOLU,  KC_TRNS,  KC_TRNS,  RGB_TOG,
      UC_NEXT,  BT_HST1,  BT_HST2,    BT_HST3,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,     KC_TRNS,  KC_TRNS,            KC_TRNS,
-     KC_TRNS,  KC_ESC,   RGB_VAI,    RGB_HUI,    RGB_SAI,    KC_MS_UP,   RGB_SPI,    KC_PGUP,    KC_HOME,    KC_UP,      KC_END,     KC_DEL,      KC_ESC,   KC_TRNS,            KC_TRNS,
+     KC_TRNS,  KC_ESC,   KC_INS,     RGB_HUI,    RGB_SAI,    KC_MS_UP,   RGB_SPI,    KC_PGUP,    KC_HOME,    KC_UP,      KC_END,     KC_DEL,      KC_ESC,   KC_TRNS,            KC_TRNS,
      KC_TRNS,  KC_LALT,  KC_TRNS,    KC_LSFT,    KC_LCTL,    KC_MS_DOWN, KC_TRNS,    KC_PGDN,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_BSPC,               KC_TRNS,            KC_TRNS,
      KC_TRNS,            LCTL(KC_X), LCTL(KC_C), LCTL(KC_D), LCTL(KC_V), LCTL(KC_Z), KC_MS_BTN1, KC_MS_BTN3, KC_MS_BTN2, KC_MS_LEFT, KC_MS_RIGHT,           KC_TRNS,  KC_TRNS,  KC_TRNS,
      KC_TRNS,  KC_TRNS,  KC_TRNS,                                        KC_TRNS,                                        KC_TRNS,    KC_TRNS,     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
