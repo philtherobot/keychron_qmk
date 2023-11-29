@@ -24,13 +24,6 @@
 // - hold Esc, turn on
 
 
-//void keyboard_post_init_user(void) {
-//    //rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-//    rgb_matrix_mode_noeeprom(RGB_MATRIX_CUSTOM_my_cool_effect);
-//    rgb_matrix_sethsv_noeeprom(HSV_OFF);
-//}
-
-// clang-format off
 enum layers{
   MAC_BASE,
   MAC_FN,
@@ -41,17 +34,16 @@ enum layers{
 };
 
 enum extend_colors {
-    ARR = 1,  // arrows
-    MOV,      // moving/jumping
-    RUB,      // rubbing
-    MOS,      // mouse
-    CLP,      // clipboard
-    MDE,      // modes
-    OTH       // other
+    ARR = 1, // arrows
+    MOV,     // moving/jumping
+    RUB,     // rubbing
+    MOS,     // mouse
+    CLP,     // clipboard
+    MDE,     // modes
+    OTH      // other
 };
 
-
-// @formatter:off
+// clang-format off
 uint8_t extend_rgb_matrix[MATRIX_ROWS * MATRIX_COLS] = {
    OTH,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,
    OTH,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,              0,
@@ -60,7 +52,7 @@ uint8_t extend_rgb_matrix[MATRIX_ROWS * MATRIX_COLS] = {
    0,              RUB,    CLP,    CLP,    CLP,    CLP,    MOS,    MOS,    MOS,    MOS,    MOS,            0,      0,      0,
    0,      0,      0,                              0,                              0,      0,      0,      0,      0,      0
 };
-// @formatter:on
+// clang-format on
 
 void set_extend_rgb_matrix(uint8_t led_min, uint8_t led_max) {
     for (uint8_t i = led_min; i < led_max; i++) {
@@ -110,6 +102,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     return false;
 }
 
+// clang-format off
 
 enum unicode_names {
     agrav,    Agrav,
@@ -233,9 +226,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //esc        F1         F2                 F3         F4         F5         F6         F7                 F8                 F9                 F10                F11                   F12        snap       del        bright
   KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,KC_TRNS           ,KC_TRNS           ,KC_TRNS           ,KC_TRNS              ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS,
   KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,KC_TRNS           ,KC_TRNS           ,KC_TRNS           ,KC_TRNS              ,KC_TRNS   ,KC_TRNS              ,KC_TRNS,
-  KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,XP(agrav, Agrav)  ,XP(ocirc, Ocirc)  ,XP(acirc, Acirc)  ,XP(icirc, Icirc)     ,KC_TRNS   ,KC_TRNS              ,KC_TRNS,
-  KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,XP(idiae, Idiae)  ,XP(eacut, Eacut)  ,XP(egrav, Egrav)  ,XP(ecirc, Ecirc)  ,XP(ediae, Ediae)     ,KC_TRNS                         ,KC_TRNS,
-  KC_TRNS   ,KC_TRNS   ,XP(ccedi, Ccedi)  ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,XP(ucirc, Ucirc)  ,XP(ugrav, Ugrav)  ,XP(udiae, Udiae)  ,KC_TRNS                                    ,KC_TRNS   ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,S(KC_LBRC),S(KC_RBRC),KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,XP(agrav, Agrav)  ,XP(ocirc, Ocirc)  ,XP(acirc, Acirc)  ,XP(icirc, Icirc)     ,KC_TRNS   ,KC_TRNS              ,KC_TRNS,
+  KC_TRNS   ,KC_LBRC   ,KC_RBRC           ,S(KC_9)   ,S(KC_0)   ,KC_TRNS   ,KC_TRNS   ,XP(idiae, Idiae)  ,XP(eacut, Eacut)  ,XP(egrav, Egrav)  ,XP(ecirc, Ecirc)  ,XP(ediae, Ediae)     ,KC_TRNS                         ,KC_TRNS,
+  KC_TRNS   ,KC_TRNS   ,XP(ccedi, Ccedi)  ,KC_EQL    ,S(KC_EQL) ,KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,XP(ucirc, Ucirc)  ,XP(ugrav, Ugrav)  ,XP(udiae, Udiae)  ,KC_TRNS                                    ,KC_TRNS   ,KC_TRNS,
   KC_TRNS   ,KC_TRNS   ,KC_TRNS                                            ,KC_TRNS                                         ,KC_TRNS           ,KC_TRNS           ,KC_TRNS              ,KC_TRNS   ,KC_TRNS   ,KC_TRNS)
 
 /* A blank layer
