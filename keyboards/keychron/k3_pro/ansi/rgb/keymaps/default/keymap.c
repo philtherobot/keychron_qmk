@@ -40,10 +40,31 @@ enum extend_colors {
     MOS,     // mouse
     CLP,     // clipboard
     MDE,     // modes
-    OTH      // other
+    OTH,     // other
+    BAS,     // base
+    HIG,     // highlight
+    CAP      // capslock
 };
 
 // clang-format off
+uint8_t win_base_rgb_matrix[MATRIX_ROWS * MATRIX_COLS] = {
+   BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,
+   BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,            BAS,
+   BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,            BAS,
+   BAS,    HIG,    HIG,    HIG,    HIG,    BAS,    BAS,    BAS,    HIG,    HIG,    HIG,    HIG,            BAS,            BAS,
+   BAS,            BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,            BAS,    BAS,    BAS,
+   BAS,    BAS,    BAS,                            BAS,                            BAS,    BAS,    BAS,    BAS,    BAS,    BAS,
+};
+
+uint8_t caps_on_rgb_matrix[MATRIX_ROWS * MATRIX_COLS] = {
+   BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,
+   BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,    BAS,            BAS,
+   BAS,    CAP,    CAP,    CAP,    CAP,    CAP,    BAS,    CAP,    CAP,    CAP,    CAP,    BAS,    BAS,    BAS,            BAS,
+   BAS,    CAP,    CAP,    CAP,    CAP,    CAP,    BAS,    CAP,    CAP,    CAP,    CAP,    CAP,            BAS,            BAS,
+   BAS,            CAP,    CAP,    CAP,    CAP,    CAP,    BAS,    CAP,    CAP,    BAS,    BAS,            BAS,    BAS,    BAS,
+   BAS,    BAS,    BAS,                            BAS,                            BAS,    BAS,    BAS,    BAS,    BAS,    BAS,
+};
+
 uint8_t extend_rgb_matrix[MATRIX_ROWS * MATRIX_COLS] = {
    OTH,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,
    OTH,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,              0,
@@ -54,9 +75,9 @@ uint8_t extend_rgb_matrix[MATRIX_ROWS * MATRIX_COLS] = {
 };
 // clang-format on
 
-void set_extend_rgb_matrix(uint8_t led_min, uint8_t led_max) {
+void set_rgb_matrix(uint8_t led_min, uint8_t led_max, uint8_t * rgb_matrix) {
     for (uint8_t i = led_min; i < led_max; i++) {
-        uint8_t color_index = extend_rgb_matrix[i];
+        uint8_t color_index = rgb_matrix[i];
 
         switch(color_index) {
             case CLP:
@@ -73,10 +94,17 @@ void set_extend_rgb_matrix(uint8_t led_min, uint8_t led_max) {
                 break;
             case OTH:
             case MOV:
+            case HIG:
                 rgb_matrix_set_color(i, RGB_BLUE);
                 break;
             case ARR:
                 rgb_matrix_set_color(i, RGB_YELLOW);
+                break;
+            case BAS:
+                rgb_matrix_set_color(i, RGB_PINK);
+                break;
+            case CAP:
+                rgb_matrix_set_color(i, RGB_RED);
                 break;
             default:
             case 0:
@@ -89,12 +117,19 @@ void set_extend_rgb_matrix(uint8_t led_min, uint8_t led_max) {
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     switch(get_highest_layer(layer_state|default_layer_state)) {
         case WIN_BASE:
-        case WIN_FN:
         case SYMBOLS1:
+            if(host_keyboard_led_state().caps_lock) {
+                set_rgb_matrix(led_min, led_max, caps_on_rgb_matrix);
+            }
+            else {
+                set_rgb_matrix(led_min, led_max, win_base_rgb_matrix);
+            }
+            break;
+        case WIN_FN:
             rgb_matrix_set_color_all(RGB_PINK);
             break;
         case EXTEND:
-            set_extend_rgb_matrix(led_min, led_max);
+            set_rgb_matrix(led_min, led_max, extend_rgb_matrix);
             break;
         default:
             break;
