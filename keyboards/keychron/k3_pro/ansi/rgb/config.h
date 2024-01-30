@@ -59,3 +59,6 @@
 
 // See `docs/feature_unicode.md`.
 #define UNICODE_SELECTED_MODES UNICODE_MODE_WINCOMPOSE, UNICODE_MODE_LINUX
+
+// See `docs/feature_caps_words.md`.
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD

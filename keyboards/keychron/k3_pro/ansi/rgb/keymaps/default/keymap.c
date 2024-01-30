@@ -17,11 +17,14 @@
 #include QMK_KEYBOARD_H
 
 // Launch QMK MSYS.
-// CDir to project directory.
+// CDir to project directory: `cd Documents/Personal/keychron_qmk`
 // To build: `make keychron/k3_pro/ansi/rgb:default`
 // To enter flash mode:
-// - turn off
-// - hold Esc, turn on
+// - Start QMK Toolbox
+// - File is at `C:\Users\philippe.payant\Documents\Personal\keychron_qmk\keychron_k3_pro_ansi_rgb_default.bin`
+// - Turn off keyboard
+// - Hold Esc, turn on
+// - Click `Flash`
 
 
 enum layers{
@@ -250,12 +253,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 
 [EXTEND] = LAYOUT_ansi_84(
-     KC_TRNS,  KC_BRID,  KC_BRIU,    KC_TASK,    KC_FILE,    RGB_VAD,    RGB_VAI,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MUTE,    KC_VOLD,     KC_VOLU,  KC_TRNS,  KC_TRNS,  UC_NEXT,
-     KC_TRNS,  BT_HST1,  BT_HST2,    BT_HST3,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,     KC_TRNS,  KC_TRNS,            KC_TRNS,
-     KC_TRNS,  KC_ESC,   KC_INS,     KC_CAPS,    RGB_SAI,    KC_MS_UP,   RGB_SPI,    KC_PGUP,    KC_HOME,    KC_UP,      KC_END,     KC_DEL,      KC_ESC,   KC_TRNS,            KC_TRNS,
-     KC_TRNS,  KC_TRNS,  KC_LALT,    KC_LSFT,    KC_LCTL,    KC_MS_DOWN, KC_TRNS,    KC_PGDN,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_BSPC,               KC_TRNS,            KC_TRNS,
-     KC_TRNS,            LCTL(KC_X), LCTL(KC_C), LCTL(KC_D), LCTL(KC_V), LCTL(KC_Z), KC_MS_BTN1, KC_MS_BTN3, KC_MS_BTN2, KC_MS_LEFT, KC_MS_RIGHT,           KC_TRNS,  KC_TRNS,  KC_TRNS,
-     KC_TRNS,  KC_TRNS,  KC_TRNS,                                        KC_TRNS,                                        KC_TRNS,    KC_TRNS,     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
+     KC_TRNS,  KC_BRID,  KC_BRIU,    KC_TASK,    KC_FILE,       RGB_VAD,    RGB_VAI,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MUTE,    KC_VOLD,     KC_VOLU,  KC_TRNS,  KC_TRNS,  UC_NEXT,
+     KC_TRNS,  BT_HST1,  BT_HST2,    BT_HST3,    KC_TRNS,       KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,     KC_TRNS,  KC_TRNS,            KC_TRNS,
+     KC_TRNS,  KC_ESC,   KC_INS,     KC_CAPS,    LCTL(KC_TAB),  KC_MS_UP,   RGB_SPI,    KC_PGUP,    KC_HOME,    KC_UP,      KC_END,     KC_DEL,      KC_ESC,   KC_TRNS,            KC_TRNS,
+     KC_TRNS,  KC_TRNS,  KC_LALT,    KC_LSFT,    OSM(MOD_LCTL), KC_MS_DOWN, KC_TRNS,    KC_PGDN,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_BSPC,               KC_TRNS,            KC_TRNS,
+     KC_TRNS,            LCTL(KC_X), LCTL(KC_C), LCTL(KC_D),    LCTL(KC_V), LCTL(KC_Z), KC_MS_BTN1, KC_MS_BTN3, KC_MS_BTN2, KC_MS_LEFT, KC_MS_RIGHT,           KC_TRNS,  KC_TRNS,  KC_TRNS,
+     KC_TRNS,  KC_TRNS,  KC_TRNS,                                           KC_TRNS,                                        KC_TRNS,    KC_TRNS,     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 
 [SYMBOLS1] = LAYOUT_ansi_84(
 //esc        F1         F2                 F3         F4         F5         F6         F7                 F8                 F9                 F10                F11                   F12        snap       del        bright
