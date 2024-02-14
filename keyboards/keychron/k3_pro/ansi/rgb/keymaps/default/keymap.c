@@ -267,7 +267,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,S(KC_LBRC),S(KC_RBRC),KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,XP(agrav, Agrav)  ,XP(ocirc, Ocirc)  ,XP(acirc, Acirc)  ,XP(icirc, Icirc)     ,KC_TRNS   ,KC_TRNS              ,KC_TRNS,
   KC_TRNS   ,KC_LBRC   ,KC_RBRC           ,S(KC_9)   ,S(KC_0)   ,KC_TRNS   ,KC_TRNS   ,XP(idiae, Idiae)  ,XP(eacut, Eacut)  ,XP(egrav, Egrav)  ,XP(ecirc, Ecirc)  ,XP(ediae, Ediae)     ,KC_TRNS                         ,KC_TRNS,
   KC_TRNS   ,KC_TRNS   ,XP(ccedi, Ccedi)  ,KC_EQL    ,S(KC_EQL) ,KC_TRNS   ,KC_TRNS   ,KC_TRNS           ,XP(ucirc, Ucirc)  ,XP(ugrav, Ugrav)  ,XP(udiae, Udiae)  ,KC_TRNS                                    ,KC_TRNS   ,KC_TRNS,
-  KC_TRNS   ,KC_TRNS   ,KC_TRNS                                            ,KC_TRNS                                         ,KC_TRNS           ,KC_TRNS           ,KC_TRNS              ,KC_TRNS   ,KC_TRNS   ,KC_TRNS)
+  KC_TRNS   ,KC_TRNS   ,KC_TRNS                                            ,KC_TRNS                                         ,KC_RALT           ,KC_TRNS           ,KC_TRNS              ,KC_TRNS   ,KC_TRNS   ,KC_TRNS)
 
 /* A blank layer
 [<name>] = LAYOUT_ansi_84(
