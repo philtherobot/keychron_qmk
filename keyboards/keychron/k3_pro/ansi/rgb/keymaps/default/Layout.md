@@ -68,8 +68,8 @@ It has "Caps Words" enabled on left and right Shift keys simultaneously pressed.
 │           │       │       │       │       │       │       │       │       │       │       │       │       │           │       │
 │           │  ESC  │  INS  │ CAPS  │ C TAB │ MS ↑  │       │ PG UP │ HOME  │   ↑   │  END  │   ⌦   │ ESC   │           │       │
 ├───────────┴─┬─────┴─┬─────┴─┬─────┴─┬─────┴─┬─────┴─┬─────┴─┬─────┴─┬─────┴─┬─────┴─┬─────┴─┬─────┴─┬─────┴───────────┼───────┤
-│             │       │       │       │  osm  │       │       │       │       │       │       │       │                 │       │
-│             │       │  ALT  │ LSHFT │ LCTRL │ MS ↓  │       │ PG DN │   ←   │   ↓   │   →   │   ⌫   │                 │       │
+│             │ SHFT+ │       │       │       │       │       │       │       │       │       │       │                 │       │
+│             │ CTRL  │  ALT  │ LSHFT │ LCTRL │ MS ↓  │       │ PG DN │   ←   │   ↓   │   →   │   ⌫   │                 │       │
 ├─────────────┴───┬───┴───┬───┴───┬───┴───┬───┴───┬───┴───┬───┴───┬───┴───┬───┴───┬───┴───┬───┴───┬───┴─────────┬───────┼───────┤
 │                 │       │       │       │       │       │       │       │       │       │       │             │       │       │
 │                 │  CUT  │ COPY  │ DUPLI │ PASTE │ UNDO  │ LCLCK │ MCLCK │ RCLCK │ MS ←  │ MS →  │             │       │       │
