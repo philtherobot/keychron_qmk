@@ -31,9 +31,9 @@ enum layers{
   MAC_BASE,
   MAC_FN,
   WIN_BASE,
-  WIN_FN,
   EXTEND,
-  SYMBOLS1
+  SYMBOLS1,
+  WIN_FN,
 };
 
 enum extend_colors {
@@ -237,47 +237,50 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 [WIN_BASE] = LAYOUT_ansi_84(
-     KC_ESC,      KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,        KC_F11,     KC_F12,   KC_PSCR,  KC_DEL,   KC_PAUSE,
-     KC_GRV,      KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_EQL,   KC_7,     KC_8,     KC_9,          KC_0,       KC_MINS,  KC_BSPC,            KC_PGUP,
-     KC_TAB,      KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,     KC_LBRC,  KC_J,     KC_L,     KC_U,     KC_Y,          KC_SCLN,    KC_QUOT,  KC_BSLS,            KC_PGDN,
-     TT(EXTEND),  KC_A,     KC_R,     KC_S,     KC_T,     KC_G,     KC_RBRC,  KC_M,     KC_N,     KC_E,     KC_I,          KC_O,                 KC_ENT,             KC_HOME,
-     KC_LSFT,               KC_X,     KC_C,     KC_D,     KC_V,     KC_Z,     KC_SLSH,  KC_K,     KC_H,     KC_COMM,       KC_DOT,               KC_RSFT,  KC_UP,    KC_END,
-     KC_LCTL,     KC_LGUI,  KC_LALT,                                KC_SPC,                                 OSL(SYMBOLS1), MO(WIN_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
-
-[WIN_FN] = LAYOUT_ansi_84(
-     _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  _______,  _______,  RGB_TOG,
-     _______,  BT_HST1,  BT_HST2,  BT_HST3,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,
-     RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,
-     _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,  _______,  _______,  _______,  _______,  _______,            _______,            _______,
-     _______,            _______,  _______,  _______,  _______,  BAT_LVL,  NK_TOGG,  _______,  _______,  _______,  _______,            _______,  _______,  _______,
-     _______,  _______,  _______,                                _______,                                _______,  _______,  _______,  _______,  _______,  _______),
+//esc          F1        F2        F3        F4        F5        F6        F7        F8        F9        F10            F11         F12       snap      del       bright
+  KC_ESC,      KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,        KC_F11,     KC_F12,   KC_PSCR,  KC_DEL,   KC_PAUSE,
+  KC_GRV,      KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_EQL,   KC_7,     KC_8,     KC_9,          KC_0,       KC_MINS,  KC_BSPC,            KC_PGUP,
+  KC_TAB,      KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,     KC_LBRC,  KC_J,     KC_L,     KC_U,     KC_Y,          KC_SCLN,    KC_QUOT,  KC_BSLS,            KC_PGDN,
+  TT(EXTEND),  KC_A,     KC_R,     KC_S,     KC_T,     KC_G,     KC_RBRC,  KC_M,     KC_N,     KC_E,     KC_I,          KC_O,                 KC_ENT,             KC_HOME,
+  KC_LSFT,               KC_X,     KC_C,     KC_D,     KC_V,     KC_Z,     KC_SLSH,  KC_K,     KC_H,     KC_COMM,       KC_DOT,               KC_RSFT,  KC_UP,    KC_END,
+  KC_LCTL,     KC_LGUI,  KC_LALT,                                KC_SPC,                                 OSL(SYMBOLS1), MO(WIN_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
 [EXTEND] = LAYOUT_ansi_84(
-     _______,  KC_BRID,    KC_BRIU,    KC_TASK,    KC_FILE,       RGB_VAD,    RGB_VAI,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MUTE,    KC_VOLD,     KC_VOLU,  _______,  _______,  UC_NEXT,
-     _______,  BT_HST1,    BT_HST2,    BT_HST3,    _______,       _______,    _______,    _______,    _______,    _______,    _______,    _______,     _______,  _______,            _______,
-     _______,  KC_ESC,     KC_INS,     KC_CAPS,    LCTL(KC_TAB),  KC_MS_UP,   RGB_SPI,    KC_PGUP,    KC_HOME,    KC_UP,      KC_END,     KC_DEL,      KC_ESC,   _______,            _______,
-     _______,  C(KC_LSFT), KC_LALT,    KC_LSFT,    KC_LCTL,       KC_MS_DOWN, _______,    KC_PGDN,    KC_LEFT,    KC_DOWN,    KC_RIGHT,   KC_BSPC,               _______,            _______,
-     _______,              LCTL(KC_X), LCTL(KC_C), LCTL(KC_D),    LCTL(KC_V), LCTL(KC_Z), KC_MS_BTN1, KC_MS_BTN3, KC_MS_BTN2, KC_MS_LEFT, KC_MS_RIGHT,           _______,  _______,  _______,
-     _______,  _______,    _______,                                           _______,                                        _______,    _______,     _______,  _______,  _______,  _______),
+//esc       F1           F2           F3           F4             F5           F6           F7          F8           F9           F10          F11           F12       snap      del       bright
+  _______  ,_______     ,_______     ,_______     ,_______       ,_______     ,_______     ,_______    ,_______     ,_______     ,_______     ,_______      ,_______  ,_______  ,_______  ,_______,
+  _______  ,_______     ,_______     ,_______     ,_______       ,_______     ,_______     ,_______    ,_______     ,_______     ,_______     ,_______      ,_______  ,_______            ,_______,
+  _______  ,KC_ESC      ,KC_INS      ,KC_CAPS     ,LCTL(KC_TAB)  ,KC_MS_UP    ,_______     ,KC_PGUP    ,KC_HOME     ,KC_UP       ,KC_END      ,KC_DEL       ,KC_ESC   ,_______            ,_______,
+  _______  ,C(KC_LSFT)  ,KC_LALT     ,KC_LSFT     ,KC_LCTL       ,KC_MS_DOWN  ,_______     ,KC_PGDN    ,KC_LEFT     ,KC_DOWN     ,KC_RIGHT    ,KC_BSPC                ,_______            ,_______,
+  _______               ,LCTL(KC_X)  ,LCTL(KC_C)  ,LCTL(KC_D)    ,LCTL(KC_V)  ,LCTL(KC_Z)  ,KC_MS_BTN1 ,KC_MS_BTN3  ,KC_MS_BTN2  ,KC_MS_LEFT  ,KC_MS_RIGHT            ,_______  ,_______  ,_______,
+  _______  ,_______     ,_______                                              ,_______                                           ,_______     ,_______      ,_______  ,_______  ,_______  ,_______),
 
 [SYMBOLS1] = LAYOUT_ansi_84(
-//esc        F1         F2                 F3         F4         F5         F6         F7                 F8                 F9                 F10                F11                   F12        snap       del        bright
-  _______   ,_______   ,_______           ,_______   ,_______   ,_______   ,_______   ,_______           ,_______           ,_______           ,_______           ,_______              ,_______   ,_______   ,_______   ,_______,
-  _______   ,_______   ,_______           ,_______   ,_______   ,_______   ,_______   ,_______           ,_______           ,_______           ,_______           ,_______              ,_______   ,_______              ,_______,
-  _______   ,_______   ,_______           ,S(KC_LBRC),S(KC_RBRC),_______   ,_______   ,_______           ,XP(agrav, Agrav)  ,XP(ocirc, Ocirc)  ,XP(acirc, Acirc)  ,XP(icirc, Icirc)     ,_______   ,_______              ,_______,
-  _______   ,KC_LBRC   ,KC_RBRC           ,S(KC_9)   ,S(KC_0)   ,_______   ,_______   ,XP(idiae, Idiae)  ,XP(eacut, Eacut)  ,XP(egrav, Egrav)  ,XP(ecirc, Ecirc)  ,XP(ediae, Ediae)     ,_______                         ,_______,
-  _______   ,_______   ,XP(ccedi, Ccedi)  ,KC_EQL    ,S(KC_EQL) ,_______   ,_______   ,_______           ,XP(ucirc, Ucirc)  ,XP(ugrav, Ugrav)  ,XP(udiae, Udiae)  ,_______                                    ,_______   ,_______,
-  _______   ,_______   ,_______                                            ,_______                                         ,KC_RALT           ,_______           ,_______              ,_______   ,_______   ,_______)
+//esc       F1        F2        F3                 F4           F5          F6        F7                 F8                 F9                 F10                F11                F12      snap       del       bright
+  _______  ,_______  ,_______  ,_______           ,_______     ,_______    ,_______  ,_______           ,_______           ,_______           ,_______           ,_______           ,_______  ,_______  ,_______  ,_______,
+  _______  ,_______  ,_______  ,_______           ,_______     ,_______    ,_______  ,_______           ,_______           ,_______           ,_______           ,_______           ,_______  ,_______            ,_______,
+  _______  ,_______  ,_______  ,S(KC_LBRC)        ,S(KC_RBRC)  ,_______    ,_______  ,_______           ,XP(agrav, Agrav)  ,XP(ocirc, Ocirc)  ,XP(acirc, Acirc)  ,XP(icirc, Icirc)  ,_______  ,_______            ,_______,
+  _______  ,KC_LBRC  ,KC_RBRC  ,S(KC_9)           ,S(KC_0)     ,_______    ,_______  ,XP(idiae, Idiae)  ,XP(eacut, Eacut)  ,XP(egrav, Egrav)  ,XP(ecirc, Ecirc)  ,XP(ediae, Ediae)            ,_______            ,_______,
+  _______            ,_______  ,XP(ccedi, Ccedi)  ,KC_EQL      ,S(KC_EQL)  ,_______  ,_______           ,_______           ,XP(ucirc, Ucirc)  ,XP(ugrav, Ugrav)  ,XP(udiae, Udiae)            ,_______  ,_______  ,_______,
+  _______  ,_______  ,_______                                              ,_______                                                           ,KC_RALT           ,_______           ,_______  ,_______  ,_______  ,_______),
+
+[WIN_FN] = LAYOUT_ansi_84(
+//esc       F1         F2        F3        F4        F5        F6        F7        F8        F9        F10       F11       F12       snap      del       bright
+  _______  ,KC_BRID   ,KC_BRIU  ,KC_TASK  ,KC_FILE  ,RGB_VAD  ,RGB_VAI  ,KC_MPRV  ,KC_MPLY  ,KC_MNXT  ,KC_MUTE  ,KC_VOLD  ,KC_VOLU  ,_______  ,_______  ,RGB_TOG,
+  _______  ,BT_HST1   ,BT_HST2  ,BT_HST3  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______            ,_______,
+  RGB_TOG  ,RGB_MOD   ,RGB_VAI  ,RGB_HUI  ,RGB_SAI  ,RGB_SPI  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______            ,_______,
+  _______  ,RGB_RMOD  ,RGB_VAD  ,RGB_HUD  ,RGB_SAD  ,RGB_SPD  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______            ,_______            ,_______,
+  _______             ,_______  ,_______  ,_______  ,_______  ,BAT_LVL  ,NK_TOGG  ,_______  ,_______  ,_______  ,_______            ,_______  ,_______  ,_______,
+  _______  ,_______   ,_______                                ,_______                                ,_______  ,_______  ,_______  ,_______  ,_______  ,_______),
 
 /* A blank layer
 [<name>] = LAYOUT_ansi_84(
-//esc        F1         F2         F3         F4         F5         F6         F7         F8         F9         F10        F11        F12        snap       del        bright
-  _______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______,
-  _______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______              ,_______,
-  _______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______              ,_______,
-  _______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______                         ,_______,
-  _______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______   ,_______                         ,_______   ,_______,
-  _______   ,_______   ,_______                                    ,_______                                    ,_______   ,_______   ,_______   ,_______   ,_______   ,_______)
+//esc       F1        F2        F3        F4        F5        F6        F7        F8        F9        F10       F11       F12       snap      del       bright
+  _______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______,
+  _______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______            ,_______,
+  _______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______            ,_______,
+  _______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______            ,_______            ,_______,
+  _______            ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______            ,_______  ,_______  ,_______,
+  _______  ,_______  ,_______                                ,_______                                ,_______  ,_______  ,_______  ,_______  ,_______  ,_______),
 */
 
 };
