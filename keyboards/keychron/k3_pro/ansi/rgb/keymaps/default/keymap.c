@@ -214,6 +214,69 @@ const uint32_t unicode_map[] PROGMEM = {
     [RAngQuot]  = 0x00BB, // »
 };
 
+
+// MEH (Ctrl-Shift-Alt mod) keys
+#define TEAMS_MUTE MEH(KC_J)
+
+
+enum custom_keycodes {
+    CUSTOM_KC_EMAIL = SAFE_RANGE,
+    CUSTOM_KC_BLDD,
+    CUSTOM_KC_BLDR,
+    CUSTOM_KC_UPDTV,
+    CUSTOM_KC_IGWN,
+    CUSTOM_KC_REGD,
+    CUSTOM_KC_REGR
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case CUSTOM_KC_EMAIL:
+            if (record->event.pressed) {
+                SEND_STRING("philtherobot@gmail.com");
+                return false;
+            }
+            break;
+        case CUSTOM_KC_BLDD:
+            if (record->event.pressed) {
+                SEND_STRING("/cygdrive/v/Setups/Build.bat build Debug; alert");
+                return false;
+            }
+            break;
+        case CUSTOM_KC_BLDR:
+            if (record->event.pressed) {
+                SEND_STRING("/cygdrive/v/Setups/Build.bat build Release; alert");
+                return false;
+            }
+            break;
+        case CUSTOM_KC_UPDTV:
+            if (record->event.pressed) {
+                SEND_STRING("/cygdrive/v/Setups/UpdateVDrive.bat");
+                return false;
+            }
+            break;
+        case CUSTOM_KC_IGWN:
+            if (record->event.pressed) {
+                SEND_STRING("/cygdrive/v/Setups/InstallGeown.bat");
+                return false;
+            }
+            break;
+        case CUSTOM_KC_REGD:
+            if (record->event.pressed) {
+                SEND_STRING("/cygdrive/v/binx64/Debug/regall2.bat /s");
+                return false;
+            }
+            break;
+        case CUSTOM_KC_REGR:
+            if (record->event.pressed) {
+                SEND_STRING("/cygdrive/v/binx64/Release/regall2.bat /s");
+                return false;
+            }
+            break;
+    }
+    return true;
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // I replaced the original MAC layers with the original WIN layers.
@@ -246,13 +309,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_LCTL,     KC_LGUI,  KC_LALT,                                KC_SPC,                                 OSL(SYMBOLS1), MO(WIN_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
 [EXTEND] = LAYOUT_ansi_84(
-//esc       F1           F2           F3           F4             F5           F6           F7          F8           F9           F10          F11           F12       snap      del       bright
-  _______  ,_______     ,_______     ,_______     ,_______       ,_______     ,_______     ,_______    ,_______     ,_______     ,_______     ,_______      ,_______  ,_______  ,_______  ,_______,
-  _______  ,_______     ,_______     ,_______     ,_______       ,_______     ,_______     ,_______    ,_______     ,_______     ,_______     ,_______      ,_______  ,_______            ,_______,
-  _______  ,KC_ESC      ,KC_INS      ,KC_CAPS     ,LCTL(KC_TAB)  ,KC_MS_UP    ,_______     ,KC_PGUP    ,KC_HOME     ,KC_UP       ,KC_END      ,KC_DEL       ,KC_ESC   ,_______            ,_______,
-  _______  ,C(KC_LSFT)  ,KC_LALT     ,KC_LSFT     ,KC_LCTL       ,KC_MS_DOWN  ,_______     ,KC_PGDN    ,KC_LEFT     ,KC_DOWN     ,KC_RIGHT    ,KC_BSPC                ,_______            ,_______,
-  _______               ,LCTL(KC_X)  ,LCTL(KC_C)  ,LCTL(KC_D)    ,LCTL(KC_V)  ,LCTL(KC_Z)  ,KC_MS_BTN1 ,KC_MS_BTN3  ,KC_MS_BTN2  ,KC_MS_LEFT  ,KC_MS_RIGHT            ,_______  ,_______  ,_______,
-  _______  ,_______     ,_______                                              ,_______                                           ,_______     ,_______      ,_______  ,_______  ,_______  ,_______),
+//esc       F1           F2           F3                F4                F5                F6              F7               F8               F9               F10          F11           F12       snap      del       bright
+  _______  ,_______     ,_______     ,CUSTOM_KC_EMAIL  ,CUSTOM_KC_IGWN  ,CUSTOM_KC_UPDTV  ,CUSTOM_KC_BLDD  ,CUSTOM_KC_BLDR  ,CUSTOM_KC_REGD  ,CUSTOM_KC_REGR  ,TEAMS_MUTE  ,_______      ,_______  ,_______  ,_______  ,UC_NEXT,
+  _______  ,_______     ,_______     ,_______          ,_______         ,_______          ,_______         ,_______         ,_______         ,_______         ,_______     ,_______      ,_______  ,_______            ,_______,
+  _______  ,KC_ESC      ,KC_INS      ,KC_CAPS          ,LCTL(KC_TAB)    ,KC_MS_UP         ,_______         ,KC_PGUP         ,KC_HOME         ,KC_UP           ,KC_END      ,KC_DEL       ,KC_ESC   ,_______            ,_______,
+  _______  ,C(KC_LSFT)  ,KC_LALT     ,KC_LSFT          ,KC_LCTL         ,KC_MS_DOWN       ,_______         ,KC_PGDN         ,KC_LEFT         ,KC_DOWN         ,KC_RIGHT    ,KC_BSPC                ,_______            ,_______,
+  _______               ,LCTL(KC_X)  ,LCTL(KC_C)       ,LCTL(KC_D)      ,LCTL(KC_V)       ,LCTL(KC_Z)      ,KC_MS_BTN1      ,KC_MS_BTN3      ,KC_MS_BTN2      ,KC_MS_LEFT  ,KC_MS_RIGHT            ,_______  ,_______  ,_______,
+  _______  ,_______     ,_______                                              ,_______                                                                         ,_______     ,_______      ,_______  ,_______  ,_______  ,_______),
 
 [SYMBOLS1] = LAYOUT_ansi_84(
 //esc       F1        F2        F3                 F4           F5          F6        F7                 F8                 F9                 F10                F11                F12      snap       del       bright
