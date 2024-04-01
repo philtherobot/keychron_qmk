@@ -221,60 +221,66 @@ const uint32_t unicode_map[] PROGMEM = {
 
 enum custom_keycodes {
     CUSTOM_KC_EMAIL = SAFE_RANGE,
-    CUSTOM_KC_BLDD,
-    CUSTOM_KC_BLDR,
+    CUSTOM_KC_BUILD,
     CUSTOM_KC_UPDTV,
     CUSTOM_KC_IGWN,
-    CUSTOM_KC_REGD,
-    CUSTOM_KC_REGR
+    CUSTOM_KC_REGS,
 };
 
+enum modded_custom_keycode {
+  mck_none, mck_build, mck_regsvr
+};
+
+enum modded_custom_keycode modded_custom_keycode_armed = mck_none;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case CUSTOM_KC_EMAIL:
-            if (record->event.pressed) {
-                SEND_STRING("philtherobot@gmail.com");
+    if (record->event.pressed) {
+        bool const isShift = get_mods() & MOD_MASK_SHIFT;
+
+        switch (keycode) {
+            case CUSTOM_KC_EMAIL:
+                 SEND_STRING("philtherobot@gmail.com");
+                 return false;
+            case CUSTOM_KC_BUILD:
+                if(isShift)
+                    modded_custom_keycode_armed = mck_build;
+                else
+                    SEND_STRING("/cygdrive/v/Setups/Build.bat build Debug; alert");
                 return false;
-            }
-            break;
-        case CUSTOM_KC_BLDD:
-            if (record->event.pressed) {
-                SEND_STRING("/cygdrive/v/Setups/Build.bat build Debug; alert");
-                return false;
-            }
-            break;
-        case CUSTOM_KC_BLDR:
-            if (record->event.pressed) {
-                SEND_STRING("/cygdrive/v/Setups/Build.bat build Release; alert");
-                return false;
-            }
-            break;
-        case CUSTOM_KC_UPDTV:
-            if (record->event.pressed) {
+            case CUSTOM_KC_UPDTV:
                 SEND_STRING("/cygdrive/v/Setups/UpdateVDrive.bat");
                 return false;
-            }
-            break;
-        case CUSTOM_KC_IGWN:
-            if (record->event.pressed) {
+            case CUSTOM_KC_IGWN:
                 SEND_STRING("/cygdrive/v/Setups/InstallGeown.bat");
                 return false;
-            }
-            break;
-        case CUSTOM_KC_REGD:
-            if (record->event.pressed) {
-                SEND_STRING("/cygdrive/v/binx64/Debug/regall2.bat /s");
+            case CUSTOM_KC_REGS:
+                if(isShift)
+                    modded_custom_keycode_armed = mck_regsvr;
+                else
+                    SEND_STRING("/cygdrive/v/binx64/Debug/regall2.bat /s");
                 return false;
-            }
-            break;
-        case CUSTOM_KC_REGR:
-            if (record->event.pressed) {
-                SEND_STRING("/cygdrive/v/binx64/Release/regall2.bat /s");
-                return false;
-            }
-            break;
+        }
     }
+
     return true;
+}
+
+void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if(!record->event.pressed) {
+        if(keycode == KC_LSFT || keycode == KC_RSFT) {
+            switch(modded_custom_keycode_armed) {
+                case mck_none: break;
+                case mck_build:
+                    SEND_STRING("/cygdrive/v/Setups/Build.bat build Release; alert");
+                    modded_custom_keycode_armed = mck_none;
+                    break;
+                case mck_regsvr:
+                    SEND_STRING("/cygdrive/v/binx64/Release/regall2.bat /s");
+                    modded_custom_keycode_armed = mck_none;
+                    break;
+            }
+        }
+    }
 }
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -309,13 +315,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_LCTL,     KC_LGUI,  KC_LALT,                                KC_SPC,                                 OSL(SYMBOLS1), MO(WIN_FN), KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
 [EXTEND] = LAYOUT_ansi_84(
-//esc       F1           F2           F3                F4                F5                F6              F7               F8               F9               F10          F11           F12       snap      del       bright
-  _______  ,_______     ,_______     ,CUSTOM_KC_EMAIL  ,CUSTOM_KC_IGWN  ,CUSTOM_KC_UPDTV  ,CUSTOM_KC_BLDD  ,CUSTOM_KC_BLDR  ,CUSTOM_KC_REGD  ,CUSTOM_KC_REGR  ,TEAMS_MUTE  ,_______      ,_______  ,_______  ,_______  ,UC_NEXT,
-  _______  ,_______     ,_______     ,_______          ,_______         ,_______          ,_______         ,_______         ,_______         ,_______         ,_______     ,_______      ,_______  ,_______            ,_______,
-  _______  ,KC_ESC      ,KC_INS      ,KC_CAPS          ,LCTL(KC_TAB)    ,KC_MS_UP         ,_______         ,KC_PGUP         ,KC_HOME         ,KC_UP           ,KC_END      ,KC_DEL       ,KC_ESC   ,_______            ,_______,
-  _______  ,C(KC_LSFT)  ,KC_LALT     ,KC_LSFT          ,KC_LCTL         ,KC_MS_DOWN       ,_______         ,KC_PGDN         ,KC_LEFT         ,KC_DOWN         ,KC_RIGHT    ,KC_BSPC                ,_______            ,_______,
-  _______               ,LCTL(KC_X)  ,LCTL(KC_C)       ,LCTL(KC_D)      ,LCTL(KC_V)       ,LCTL(KC_Z)      ,KC_MS_BTN1      ,KC_MS_BTN3      ,KC_MS_BTN2      ,KC_MS_LEFT  ,KC_MS_RIGHT            ,_______  ,_______  ,_______,
-  _______  ,_______     ,_______                                              ,_______                                                                         ,_______     ,_______      ,_______  ,_______  ,_______  ,_______),
+//esc       F1           F2           F3           F4             F5           F6               F7               F8               F9               F10          F11           F12       snap      del       bright
+  _______  ,_______     ,_______     ,_______     ,_______       ,_______     ,_______         ,_______         ,_______         ,_______         ,_______     ,_______      ,_______  ,_______  ,_______  ,UC_NEXT,
+  _______  ,_______     ,_______     ,_______     ,_______       ,_______     ,_______         ,_______         ,_______         ,_______         ,_______     ,_______      ,_______  ,_______            ,_______,
+  _______  ,KC_ESC      ,KC_INS      ,KC_CAPS     ,LCTL(KC_TAB)  ,KC_MS_UP    ,_______         ,KC_PGUP         ,KC_HOME         ,KC_UP           ,KC_END      ,KC_DEL       ,KC_ESC   ,_______            ,_______,
+  _______  ,C(KC_LSFT)  ,KC_LALT     ,KC_LSFT     ,KC_LCTL       ,KC_MS_DOWN  ,_______         ,KC_PGDN         ,KC_LEFT         ,KC_DOWN         ,KC_RIGHT    ,KC_BSPC                ,_______            ,_______,
+  _______               ,LCTL(KC_X)  ,LCTL(KC_C)  ,LCTL(KC_D)    ,LCTL(KC_V)  ,LCTL(KC_Z)      ,KC_MS_BTN1      ,KC_MS_BTN3      ,KC_MS_BTN2      ,KC_MS_LEFT  ,KC_MS_RIGHT            ,_______  ,_______  ,_______,
+  _______  ,_______     ,_______                                              ,_______                                                            ,_______     ,_______      ,_______  ,_______  ,_______  ,_______),
 
 [SYMBOLS1] = LAYOUT_ansi_84(
 //esc       F1        F2        F3                 F4           F5          F6        F7                 F8                 F9                 F10                F11                F12      snap       del       bright
@@ -327,13 +333,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______  ,_______  ,_______                                              ,_______                                                           ,KC_RALT           ,_______           ,_______  ,_______  ,_______  ,_______),
 
 [WIN_FN] = LAYOUT_ansi_84(
-//esc       F1         F2        F3        F4        F5        F6        F7        F8        F9        F10       F11       F12       snap      del       bright
-  _______  ,KC_BRID   ,KC_BRIU  ,KC_TASK  ,KC_FILE  ,RGB_VAD  ,RGB_VAI  ,KC_MPRV  ,KC_MPLY  ,KC_MNXT  ,KC_MUTE  ,KC_VOLD  ,KC_VOLU  ,_______  ,_______  ,RGB_TOG,
-  _______  ,BT_HST1   ,BT_HST2  ,BT_HST3  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______            ,_______,
-  RGB_TOG  ,RGB_MOD   ,RGB_VAI  ,RGB_HUI  ,RGB_SAI  ,RGB_SPI  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______            ,_______,
-  _______  ,RGB_RMOD  ,RGB_VAD  ,RGB_HUD  ,RGB_SAD  ,RGB_SPD  ,_______  ,_______  ,_______  ,_______  ,_______  ,_______            ,_______            ,_______,
-  _______             ,_______  ,_______  ,_______  ,_______  ,BAT_LVL  ,NK_TOGG  ,_______  ,_______  ,_______  ,_______            ,_______  ,_______  ,_______,
-  _______  ,_______   ,_______                                ,_______                                ,_______  ,_______  ,_______  ,_______  ,_______  ,_______),
+//esc       F1        F2                F3        F4        F5                F6        F7        F8        F9        F10          F11       F12       snap      del       bright
+  _______  ,KC_BRID  ,KC_BRIU          ,KC_TASK  ,KC_FILE  ,RGB_VAD          ,RGB_VAI  ,KC_MPRV  ,KC_MPLY  ,KC_MNXT  ,KC_MUTE     ,KC_VOLD  ,KC_VOLU  ,_______  ,_______  ,RGB_TOG,
+  _______  ,BT_HST1  ,BT_HST2          ,BT_HST3  ,_______  ,_______          ,_______  ,_______  ,_______  ,_______  ,TEAMS_MUTE  ,_______  ,_______  ,_______            ,_______,
+  _______  ,_______  ,_______          ,_______  ,_______  ,CUSTOM_KC_BUILD  ,_______  ,_______  ,_______  ,_______  ,_______     ,_______  ,_______  ,_______            ,_______,
+  _______  ,_______  ,CUSTOM_KC_REGS   ,_______  ,_______  ,CUSTOM_KC_IGWN   ,_______  ,_______  ,_______  ,_______  ,_______     ,_______            ,_______            ,_______,
+  _______            ,CUSTOM_KC_EMAIL  ,_______  ,_______  ,CUSTOM_KC_UPDTV  ,BAT_LVL  ,_______  ,_______  ,_______  ,_______     ,_______            ,_______  ,_______  ,_______,
+  _______  ,_______  ,_______                                                ,_______                                ,_______     ,_______  ,_______  ,_______  ,_______  ,_______),
 
 /* A blank layer
 [<name>] = LAYOUT_ansi_84(
